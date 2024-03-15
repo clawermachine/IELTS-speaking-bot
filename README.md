@@ -2,7 +2,6 @@
 AI-powered Telegram bot for the speaking  skill impovement  
 
 ### USAGE ###  
-  
 Press START or type /start.  
 LLM will choose one of the IELTS speaking topics and make an conversation.  
 Just listen to the voice and answer with voice.  
@@ -20,3 +19,6 @@ Just listen to the voice and answer with voice.
 - allow to manage voices database  
 - force LLM to evaluate the user's literacy  
 - add some scenarios of the conversations  
+
+### DEPENDENCIES ###  
+- store your telegram bot API KEY in tg_api.txt  
