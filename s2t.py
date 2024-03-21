@@ -15,6 +15,17 @@ def ogg2wav(file, Fs):
     os.remove(file)
     return new_file, length
     
+def download_model():
+
+    import requests, zipfile
+    from io import BytesIO
+
+    url = 'https://alphacephei.com/vosk/models/vosk-model-en-us-0.42-gigaspeech.zip'
+    filename = url.split('/')[-1]
+
+    req = requests.get(url)
+    zipfile= zipfile.ZipFile(BytesIO(req.content))
+    zipfile.extractall('models/')
 
 def s2t_init():
     lang = 'en-large'
@@ -26,6 +37,11 @@ def s2t_init():
     elif lang[-5:] == 'large':
         Fs = 8000
 
+    if not os.path.isdir(paths[lang]):
+        download_model()
+        
+    assert os.path.isdir(paths[lang]), 'Silero model not found'
+    
     model = Model(paths[lang]) # полный путь к модели
   
     rec = KaldiRecognizer(model, Fs)

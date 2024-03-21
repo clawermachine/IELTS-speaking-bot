@@ -52,6 +52,12 @@ def wav2opus(filename):
     return output_filename
         
 def t2s_init():
+    
+    if not os.path.isfile('model.pt'):
+        torch.hub.download_url_to_file('https://models.silero.ai/models/tts/ru/v4_ru.pt', 'model.pt')
+
+    assert os.path.isfile('model.pt'), 'Silero model not found'
+    
     device = torch.device('cpu')
     torch.set_num_threads(4)
     local_file_ru = 'model.pt'
